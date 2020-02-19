@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# sudo su -c "mkdir /tmp/there" -s /bin/bash badpeswg
+
+cd /home/badpeswg/
+
+PACKAGE=dummy-hello
+
+mkdir $PACKAGE
+cd $PACKAGE
+git init
+
+cat > dummy-hello <<EOF
+#!/bin/bash
+# (C) 2020 GPL2+
+echo "Hello dummy-hello"
+EOF
+
+chmod 755 dummy-hello
+

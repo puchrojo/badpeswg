@@ -1,0 +1,3 @@
+#!/bin/bash
+
+sudo su -c "./04-init-package" -s /bin/bash badpeswg 

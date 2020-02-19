@@ -1,0 +1,4 @@
+#!/bin/bash
+echo "Disee Packages are necesary for this recipe"
+
+sudo apt-get install dh-make git-buildpackage

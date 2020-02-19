@@ -1,0 +1,8 @@
+sudo su - badpeswg
+
+PACKAGE=dummy-hello
+
+mkdir $PACKAGE
+cd $PACKAGE
+git init
+
