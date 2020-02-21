@@ -1,7 +1,22 @@
 #!/bin/bash
+source 02-variables
 
-# sudo su -c "mkdir /tmp/there" -s /bin/bash badpeswg
+echo ""
+echo "04-init-package"
 
+echo "Configuration"
+cat>>~/.bashrc<<EOF
+DEBFULLNAME="$DEBFULLNAME"
+DEBEMAIL="$DEBMAIL"
+export DEBEMAIL DEBFULLNAME
+alias l='ls -la'
+EOF
+
+git config --global user.email "$DEBMAIL"
+git config --global user.name "$DEBFULLNAME"
+
+
+echo "Init Package"
 cd /home/badpeswg/
 
 PACKAGE=dummy-hello
@@ -17,4 +32,29 @@ echo "Hello dummy-hello"
 EOF
 
 chmod 755 dummy-hello
+
+git checkout -b upstream
+git add dummy-hello
+git commit -m "Init dummy-hello"
+git tag -l "v0.0.1"
+
+git checkout -b master
+git merge upstream
+
+tar -czvf ../dummy-hello-0.0.1.tar.gz dummy-hello
+# debmake need a tar.gz
+
+debmake --upstreamversion 0.0.1
+
+sed -i 's/UNRELEASED/unstable/g' /home/badpeswg/dummy-hello/debian/changelog
+
+echo "This ackage has only the scripyt dummy-hello, that sould be under /usr/bin install"
+echo "dummy-hello usr/bin" >> /home/badpeswg/dummy-hello/debian/install
+
+git add debian
+git commit -m "Init Debian conf mit debmake"
+gbp buildpackage
+
+echo "/home/badpeswg/dummy-hello_0.0.1-1_amd64.deb würde erstellt"
+
 

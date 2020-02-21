@@ -1,0 +1,37 @@
+#!/bin/bash
+
+echo ""
+echo "07-update-package"
+
+echo "Update dummy-hello to version 0.0.2"
+echo "The changes are on the upstream branch"
+
+cd /home/badpeswg/dummy-hello
+git checkout upstream
+
+echo "Changes on code"
+sed -i 's/Hello dummy-hello/Hello dummy-hello 0.0.2/g' /home/badpeswg/dummy-hello/dummy-hello  
+
+git add  dummy-hello
+git commit -m"New Version 0.0.2"
+git tag -l "v0.0.2"
+
+git checkout master
+git merge upstream -m "Merge Version 0.0.2"
+
+sed -i 's/UNRELEASED/unstable/g' /home/badpeswg/dummy-hello/debian/changelog
+echo "gbp-dch — Generate the Debian™ changelog from git commit messages"
+gbp dch
+sed -i 's/UNRELEASED/unstable/g' /home/badpeswg/dummy-hello/debian/changelog
+
+git add debian
+git commit -m"New Version 0.0.2 on master-branch"
+
+tar -czvf ../dummy-hello-0.0.2.tar.gz dummy-hello
+
+gbp buildpackage
+
+
+
+
+
