@@ -13,4 +13,5 @@ Build a Debian package from scratch with git
 
 # Install
 run ./bin/all to install the user and build the debian packages.
+
 with ./bin/10-change-user login to see the packages.
