@@ -36,7 +36,7 @@ chmod 755 dummy-hello
 git checkout -b upstream
 git add dummy-hello
 git commit -m "Init dummy-hello"
-git tag -l "v0.0.1"
+git tag -a v0.0.1 -m "version 0.0.1"
 
 git checkout -b master
 git merge upstream

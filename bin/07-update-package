@@ -14,7 +14,8 @@ sed -i 's/Hello dummy-hello/Hello dummy-hello 0.0.2/g' /home/badpeswg/dummy-hell
 
 git add  dummy-hello
 git commit -m"New Version 0.0.2"
-git tag -l "v0.0.2"
+git tag -a v0.0.2 -m "version 0.0.2"
+git tag -l 
 
 git checkout master
 git merge upstream -m "Merge Version 0.0.2"
