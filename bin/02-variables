@@ -1,5 +1,5 @@
 #!/bin/bash
 
-DEBFULLNAME="-Surname Name"
-DEBEMAIL="your-email@example.org"
+DEBFULLNAME="Puch Rojo, Isaac"
+DEBEMAIL="puchrojo@example.org"
 

@@ -1,4 +1,5 @@
 #!/bin/bash
+source 02-variables
 
 echo ""
 echo "07-update-package"
@@ -20,19 +21,33 @@ git tag -l
 git checkout master
 git merge upstream -m "Merge Version 0.0.2"
 
-sed -i 's/UNRELEASED/unstable/g' /home/badpeswg/dummy-hello/debian/changelog
+
 echo "gbp-dch — Generate the Debian™ changelog from git commit messages"
 gbp dch
 sed -i 's/UNRELEASED/unstable/g' /home/badpeswg/dummy-hello/debian/changelog
+echo "dpkg-source --commit  "
+
 
 git add debian
-git commit -m"New Version 0.0.2 on master-branch"
+git commit -am"New Version 0.0.2 on master-branch"
 
 tar -czvf ../dummy-hello-0.0.2.tar.gz dummy-hello
+
+dpkg-source --commit
+echo "geht weiter"
+git add debian
+git add .pc
+git commit -am"New Version 0.0.2 on master-branch (2)"
+
+echo "-------------------"
+echo gbp buildpackage
+echo "-------------------"
 
 gbp buildpackage
 
 
+
+echo "so kriegt man ein debian package, allerdings mit Fehler bei: running debsign failed"
 
 
 

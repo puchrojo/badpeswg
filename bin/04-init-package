@@ -52,8 +52,11 @@ echo "This ackage has only the scripyt dummy-hello, that sould be under /usr/bin
 echo "dummy-hello usr/bin" >> /home/badpeswg/dummy-hello/debian/install
 
 git add debian
-git commit -m "Init Debian conf mit debmake"
+git commit -am "Init Debian conf mit debmake"
 gbp buildpackage
+
+git add debian
+git commit -m"After gbp buildpackage"
 
 echo "/home/badpeswg/dummy-hello_0.0.1-1_amd64.deb würde erstellt"
 
