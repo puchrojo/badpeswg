@@ -1,0 +1,13 @@
+#!/bin/bash
+
+sudo apt-get install /home/badpeswg/dummy-hello_0.0.2-1_amd64.deb
+
+echo "Check dummy-hello"
+output=$(dummy-hello)
+if [[ $output != "Hello dummy-hello 0.0.2" ]] 
+then
+   echo "Error on output von dummy-hello Debian package"
+   exit 3
+fi
+
+# sudo apt-get purge dummy-hello -y
