@@ -16,13 +16,15 @@ sed -i 's/Hello dummy-hello/Hello dummy-hello 0.0.2/g' /home/badpeswg/dummy-hell
 git add  dummy-hello
 git commit -m"New Version 0.0.2"
 git tag -a v0.0.2 -m "version 0.0.2"
+git tag -a upstream/v0.0.2 -m "upstream/version 0.0.2"
+#git tag -a master/v0.0.2 -m "master-debian/version 0.0.2"
 git tag -l 
 
 git checkout master
 git merge upstream -m "Merge Version 0.0.2"
 
 
-echo "gbp-dch — Generate the Debian™ changelog from git commit messages"
+echo "gbp dch # Generate the Debian™ changelog from git commit messages"
 gbp dch
 sed -i 's/UNRELEASED/unstable/g' /home/badpeswg/dummy-hello/debian/changelog
 echo "dpkg-source --commit  "
@@ -33,21 +35,18 @@ git commit -am"New Version 0.0.2 on master-branch"
 
 tar -czvf ../dummy-hello-0.0.2.tar.gz dummy-hello
 
-dpkg-source --commit
-echo "geht weiter"
-git add debian
-git add .pc
-git commit -am"New Version 0.0.2 on master-branch (2)"
-
 echo "-------------------"
 echo gbp buildpackage
 echo "-------------------"
 
 gbp buildpackage
 
+git add debian
+git commit -am"After build Version 0.0.2 on master-branch"
 
 
-echo "so kriegt man ein debian package, allerdings mit Fehler bei: running debsign failed"
+echo "Now you get a Debian Package 0.0.2-1, only the debsign failed"
+
 
 
 

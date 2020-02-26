@@ -33,6 +33,15 @@ EOF
 
 chmod 755 dummy-hello
 
+echo "Config gbp file .git/gbp.conf"
+cat <<EOF > .git/gbp.conf 
+[DEFAULT] 
+# this is the upstream-branch: 
+upstream-branch=upstream 
+upstream-tag = v%(version)s
+EOF
+
+
 git checkout -b upstream
 git add dummy-hello
 git commit -m "Init dummy-hello"
